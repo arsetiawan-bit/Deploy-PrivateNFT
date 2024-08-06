@@ -10,21 +10,21 @@ contract PrivateNFT is ERC721, Ownable {
     event NFTMinted(address recipient, uint256 tokenId);
     event NFTBurned(uint256 tokenId);
 
-    constructor(address initialOwner) ERC721("IzzyPrivate", "IZZPRVT") Ownable(initialOwner) {}
+    constructor(address initialOwner) ERC721("DotaPrivate", "DOTAPRVT") Ownable(initialOwner) {}
 
     function mintNFT(address recipient) public onlyOwner returns (uint256) {
         _currentTokenId += 1;
         uint256 newItemId = _currentTokenId;
         _mint(recipient, newItemId);
-        
-        emit NFTMinted(recipient, newItemId);  
+
+        emit NFTMinted(recipient, newItemId);
         return newItemId;
     }
 
     function burnNFT(uint256 tokenId) public {
         require(ownerOf(tokenId) == msg.sender, "Error: You're not owner");
         _burn(tokenId);
-        emit NFTBurned(tokenId);  
+        emit NFTBurned(tokenId);
 
     }
 
